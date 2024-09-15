@@ -4,6 +4,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from pymongo import MongoClient
 import logging
 import re
+import os
 WEBHOOK_URL = "https://codereaper-t8q5.onrender.com"
 # Set up logging to track errors and bot behavior
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
