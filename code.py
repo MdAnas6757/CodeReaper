@@ -4,7 +4,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from pymongo import MongoClient
 import logging
 import re
-
+WEBHOOK_URL = "https://codereaper-t8q5.onrender.com"
 # Set up logging to track errors and bot behavior
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -158,8 +158,13 @@ def main():
     # Log all errors
     application.add_error_handler(error)
 
-    # Start the bot
-    application.run_polling()
+    # Start the bot using Webhook
+    application.run_webhook(
+        listen="0.0.0.0",  # Listen on all available interfaces
+        port=int(os.environ.get("PORT", 8443)),  # Use PORT environment variable (default 8443)
+        url_path=f"{TOKEN}",  # URL path for security
+        webhook_url=f"{WEBHOOK_URL}/{TOKEN}"  # Full Webhook URL
+    )
 
 if __name__ == '__main__':
     main()
